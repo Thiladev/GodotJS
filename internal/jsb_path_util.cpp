@@ -82,7 +82,7 @@ namespace jsb::internal
 
     String PathUtil::convert_typescript_path(const String& p_source_path)
     {
-        if (p_source_path.ends_with("." JSB_TYPESCRIPT_EXT))
+        if (p_source_path.ends_with("." JSB_TYPESCRIPT_EXT) || p_source_path.ends_with("." JSB_TSX_EXT))
         {
             jsb_checkf(p_source_path.begins_with("res://"), "can not proceed typescript sources not under the project directory");
             const String replaced = Settings::get_jsb_out_res_path().path_join(

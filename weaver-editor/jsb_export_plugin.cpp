@@ -33,7 +33,7 @@ void GodotJSExportPlugin::export_raw_files(const PackedStringArray &p_paths, boo
         // in this situation, we do not call `load module` to avoid unexpected side effects
         // (for example, it's impossible to directly load worker scripts in main env).
 
-        if (!file_path.ends_with("." JSB_TYPESCRIPT_EXT))
+        if (!file_path.ends_with("." JSB_TYPESCRIPT_EXT) && !file_path.ends_with("." JSB_TSX_EXT))
         {
             export_raw_file(file_path, false);
         }
@@ -233,7 +233,7 @@ void GodotJSExportPlugin::_export_file(const String& p_path, const String& p_typ
 {
     //TODO when exporting for web.impl, need to reorganize all scripts into a monolithic script (like webpack)? and preload it before everything get run.
 
-    if (p_path.ends_with("." JSB_TYPESCRIPT_EXT))
+    if (p_path.ends_with("." JSB_TYPESCRIPT_EXT) || p_path.ends_with("." JSB_TSX_EXT))
     {
         const String compiled_script_path = jsb::internal::PathUtil::convert_typescript_path(p_path);
         export_compiled_script(compiled_script_path, true);
